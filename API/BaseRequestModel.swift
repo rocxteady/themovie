@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct BaseRequestModel: Encodable {
+open class BaseRequestModel: Encodable {
     
     var apiKey = Properties.apiKey
     

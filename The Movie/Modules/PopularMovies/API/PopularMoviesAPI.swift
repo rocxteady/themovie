@@ -13,14 +13,21 @@ class PopularMoviesAPI: API {
     
     public typealias ResponseModel = PageResponseModel<Movie>
 
-    public typealias RequestModel = BaseRequestModel
+    public typealias RequestModel = PageRequestModel
         
     public var uri = "/movie/popular"
     
     public var endpoint: RestEndpoint
     
-    public init() {
-        endpoint = RestEndpoint(urlString: Properties.baseURL + uri, parameters: try! BaseRequestModel().toDictionary())
+    public var parameters: RequestModel? {
+        didSet {
+            endpoint.parameters = try? parameters?.toDictionary()
+        }
+    }
+    
+    public init(parameters: RequestModel? = nil) {
+        endpoint = RestEndpoint(urlString: Properties.baseURL + uri, parameters: try? parameters.toDictionary())
+        self.parameters = parameters
     }
     
 }

@@ -46,17 +46,19 @@ extension RestClientManager {
             return
         }
         task = session.dataTask(with: realRequest) { [weak self] (data, response, error) in
-            if let error = error {
-                self?.state = .suspended
-                completion(.failure(RestError.urlSession(error: error)))
-            }
-            else if let data = data {
-                self?.state = .completed
-                completion(.success(data))
-            }
-            else {
-                self?.state = .suspended
-                completion(.failure(RestError.unknown))
+            DispatchQueue.main.async {
+                if let error = error {
+                    self?.state = .suspended
+                    completion(.failure(RestError.urlSession(error: error)))
+                }
+                else if let data = data {
+                    self?.state = .completed
+                    completion(.success(data))
+                }
+                else {
+                    self?.state = .suspended
+                    completion(.failure(RestError.unknown))
+                }
             }
         }
         state = .running
