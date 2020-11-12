@@ -39,7 +39,7 @@ class AsyncImageView: UIImageView {
     private func setup() {
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .returnCacheDataElseLoad
-        config.urlCache = URLCache.shared
+        config.urlCache = URLCache(memoryCapacity: 20 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, diskPath: "TheMovie")
         session = URLSession(configuration: config)
     }
     
@@ -48,7 +48,7 @@ class AsyncImageView: UIImageView {
 extension AsyncImageView {
     func set(url: URL) {
         task = session.dataTask(with: url, completionHandler: { [weak self] (data, response, error) in
-            guard let data = data, let image = UIImage(data: data) else { return }
+            guard let data = data, let image = UIImage(data: data), self?.task?.currentRequest?.url?.absoluteString == response?.url?.absoluteString else { return }
             DispatchQueue.main.async {
                 self?.image = image
             }

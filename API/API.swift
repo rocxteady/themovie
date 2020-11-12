@@ -34,6 +34,20 @@ public extension API {
                     apiResponse.error = error
                 }
             case .failure(let error):
+                if let restError = error as? RestError {
+                    switch restError {
+                    case .data(let data):
+                        do {
+                            let responseModel: ResponseModel = try data.toDecodable()
+                            apiResponse.responseModel = responseModel
+                            apiResponse.success = false
+                        } catch let error {
+                            apiResponse.error = error
+                        }
+                    default:
+                        break
+                    }
+                }
                 apiResponse.error = error
             }
             completion(apiResponse)

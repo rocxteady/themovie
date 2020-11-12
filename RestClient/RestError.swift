@@ -7,12 +7,13 @@
 
 import Foundation
 
-enum RestError: Error {
+public enum RestError: Error {
     
     case badURL
     case badHost
     case jsonSerialization(error: Error?)
     case urlSession(error: Error?)
+    case data(data: Data)
     case unknown
     
 }

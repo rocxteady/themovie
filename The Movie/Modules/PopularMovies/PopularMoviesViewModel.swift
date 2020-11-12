@@ -7,13 +7,13 @@
 
 import Foundation
 
-typealias CompletionBlock = (_ error: Error?) -> ()
+typealias CompletionBlock = (_ error: String?) -> ()
 
 class PopularMoviesViewModel {
     
     var movies = [Movie]()
-    let api = PopularMoviesAPI()
-    let parameters = PageRequestModel()
+    private let api = PopularMoviesAPI()
+    private let parameters = PageRequestModel()
     
     init() {
         api.parameters = parameters
@@ -21,8 +21,8 @@ class PopularMoviesViewModel {
     
     func getMovies(completion: @escaping CompletionBlock) {
         api.start { [weak self] (response) in
-            if let error = response.error {
-                completion(error)
+            if !response.success {
+                completion(response.responseModel?.statusMessage ?? "Unkown Error")
             } else {
                 self?.movies = response.responseModel?.results ?? []
                 completion(nil)
@@ -30,7 +30,22 @@ class PopularMoviesViewModel {
         }
     }
     
+    func addRemoveFavorites(by movieId: Int, shouldAdd: Bool = true) {
+        if let movie = movies.firstElement(by: movieId) {
+            movie.isFavorite = shouldAdd
+        }
+    }
+
     deinit {
         api.end()
     }
+}
+
+extension PopularMoviesViewModel {
+    
+    func createDetailViewModel(at index: Int) -> MovieDetailViewModel {
+        let movie = movies[index]
+        return MovieDetailViewModel(movieId: movie.id)
+    }
+    
 }

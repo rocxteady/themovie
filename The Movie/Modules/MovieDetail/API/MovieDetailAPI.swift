@@ -2,20 +2,20 @@
 //  PopularMoviesAPI.swift
 //  The Movie
 //
-//  Created by Ulaş Sancak on 10.11.2020.
+//  Created by Ulaş Sancak on 12.11.2020.
 //
 
 import Foundation
 import API
 import RestClient
 
-class PopularMoviesAPI: API {
+class MovieDetailAPI: API {
     
-    public typealias ResponseModel = PageResponseModel<Movie>
+    public typealias ResponseModel = MovieDetail
 
-    public typealias RequestModel = PageRequestModel
+    public typealias RequestModel = BaseRequestModel
         
-    public var uri = "/movie/popular"
+    public var uri = "/movie"
     
     public var endpoint: RestEndpoint
     
@@ -25,7 +25,8 @@ class PopularMoviesAPI: API {
         }
     }
     
-    public init(parameters: RequestModel = RequestModel()) {
+    public init(movieId: Int, parameters: RequestModel = RequestModel()) {
+        uri += "/\(movieId)"
         endpoint = RestEndpoint(urlString: Properties.baseURL + uri, parameters: try? parameters.toDictionary())
         self.parameters = parameters
     }

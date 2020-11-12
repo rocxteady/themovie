@@ -15,7 +15,7 @@ internal class RestClientManager {
     
     //MARK: Private properties
     
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
+    private let session: URLSession
     
     /// The state of current request.
     internal var state: RestClientState = .idle
@@ -23,6 +23,11 @@ internal class RestClientManager {
     /// The URLSessionTask instance of current request.
     internal var task: URLSessionTask?
     
+    init() {
+        let configuration = URLSessionConfiguration.default
+        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+        session = URLSession(configuration: configuration)
+    }
 }
 
 //MARK: Control The Manager
@@ -52,8 +57,15 @@ extension RestClientManager {
                     completion(.failure(RestError.urlSession(error: error)))
                 }
                 else if let data = data {
-                    self?.state = .completed
-                    completion(.success(data))
+                    if let urlResponse = response as? HTTPURLResponse,
+                       !(200...299).contains(urlResponse.statusCode) {
+                        self?.state = .suspended
+                        completion(.failure(RestError.data(data: data)))
+                    }
+                    else {
+                        self?.state = .completed
+                        completion(.success(data))
+                    }
                 }
                 else {
                     self?.state = .suspended

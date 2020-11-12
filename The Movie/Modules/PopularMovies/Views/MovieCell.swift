@@ -16,6 +16,8 @@ class MovieCell: UICollectionViewCell {
     var favoriteButton: UIButton!
     var titleView: UIView!
     
+    private weak var movie: Movie?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -36,6 +38,7 @@ class MovieCell: UICollectionViewCell {
         favoriteButton = UIButton()
         favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
         favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .selected)
+        favoriteButton.addTarget(self, action: #selector(addRemoveFavorite), for: .touchUpInside)
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         
         titleLabel = UILabel()
@@ -45,7 +48,7 @@ class MovieCell: UICollectionViewCell {
         
         titleView = UIView()
         titleView.translatesAutoresizingMaskIntoConstraints = false
-        titleView.backgroundColor = .label
+        titleView.backgroundColor = UIColor.label.withAlphaComponent(0.5)
         
         contentView.addSubview(imageView)
         contentView.addSubview(favoriteButton)
@@ -65,14 +68,24 @@ class MovieCell: UICollectionViewCell {
         titleView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2.0).isActive = true
     }
     
+    @objc func addRemoveFavorite() {
+        guard let movie = movie else { return }
+        movie.isFavorite = !movie.isFavorite
+        favoriteButton.isSelected = movie.isFavorite
+    }
+    
 }
 
 extension MovieCell {
     
-    func configure(movie: Movie) {
-        titleLabel.text = "Hop"
+    func configure(movie: Movie, layoutType: MoviesLayoutType = .list) {
+        self.movie = movie
+        favoriteButton.isSelected = movie.isFavorite
+        titleLabel.text = movie.title
         imageView.image = nil
-        imageView.set(url: URL(string: "https://www.cicekdiyari.com/buyukresim/bisiklette-cicek-tasarim-cicek-resim.jpg")!)
+        if let url = URL(string: layoutType == .list ? movie.smallBackdrop : movie.smallPoster) {
+            imageView.set(url: url)
+        }
     }
     
 }

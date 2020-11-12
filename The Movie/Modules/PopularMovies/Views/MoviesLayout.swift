@@ -28,9 +28,9 @@ class MoviesLayout: UICollectionViewFlowLayout {
             if type != oldValue {
                 switch type {
                 case .list:
-                    itemSize = CGSize(width: UIScreen.main.bounds.width - sectionInset.left - sectionInset.right, height: 120.0)
+                    itemSize = CGSize(width: UIScreen.main.bounds.width - sectionInset.left - sectionInset.right, height: 232.0)
                 case .grid:
-                    itemSize = CGSize(width: (UIScreen.main.bounds.width - sectionInset.left - sectionInset.right - minimumInteritemSpacing)/2.0, height: 200.0)
+                    itemSize = CGSize(width: (UIScreen.main.bounds.width - sectionInset.left - sectionInset.right - minimumInteritemSpacing)/2.0, height: 303.0)
                 }
             }
         }
@@ -51,6 +51,7 @@ extension MoviesLayout {
     
     func toggle() {
         type = type == .list ? .grid : .list
+        invalidateLayout()
     }
     
 }
