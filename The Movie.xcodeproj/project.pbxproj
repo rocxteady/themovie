@@ -289,8 +289,8 @@
 		7C4C2BDA255B2C2B001B9E5F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				7CA8E25C255D5ADE000B1334 /* MovieDetail */,
 				7C4C2BDB255B2C41001B9E5F /* PopularMovies */,
+				7CA8E25C255D5ADE000B1334 /* MovieDetail */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
