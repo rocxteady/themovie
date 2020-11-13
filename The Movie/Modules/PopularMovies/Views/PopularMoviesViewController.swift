@@ -91,6 +91,7 @@ extension PopularMoviesViewController {
     @objc private func changeLayout() {
         layout.toggle()
         layoutChangeButton.image = layout.type.image
+        collectionView.reloadData()
     }
 
 }

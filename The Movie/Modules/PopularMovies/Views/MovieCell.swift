@@ -82,6 +82,7 @@ extension MovieCell {
         self.movie = movie
         favoriteButton.isSelected = movie.isFavorite
         titleLabel.text = movie.title
+        titleLabel.textAlignment = layoutType == .list ? .natural : .center
         imageView.image = nil
         if let url = URL(string: layoutType == .list ? movie.smallBackdrop : movie.smallPoster) {
             imageView.set(url: url)
