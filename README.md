@@ -6,6 +6,7 @@ Sample iOS application presenting usage of MVVM pattern using The Movie DB API.
 Project provides listing movies with two different layouts.  These are also can storable on local database.
 
 Project consuming https://api.themoviedb.org for data source.
+
 ![Usage Example](sample.gif)
 
 ## Technical Features
