@@ -45,6 +45,8 @@
 		7CA8E27E255DA218000B1334 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA8E27D255DA218000B1334 /* MovieDetailViewModel.swift */; };
 		7CA8E2A2255DACB7000B1334 /* FavoriteMovieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA8E2A1255DACB7000B1334 /* FavoriteMovieManager.swift */; };
 		7CA8E2AA255DD9BB000B1334 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA8E2A9255DD9BB000B1334 /* UIViewController+Alert.swift */; };
+		7CC3654527AB1CC200CD6886 /* RestClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4C2B39255ADD91001B9E5F /* RestClient.framework */; };
+		7CC3654627AB1CC200CD6886 /* RestClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4C2B39255ADD91001B9E5F /* RestClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7CDAC06E2559D6D4002BFDAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDAC06D2559D6D4002BFDAE /* AppDelegate.swift */; };
 		7CDAC0702559D6D4002BFDAE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDAC06F2559D6D4002BFDAE /* SceneDelegate.swift */; };
 		7CDAC0772559D6D5002BFDAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CDAC0762559D6D5002BFDAE /* Assets.xcassets */; };
@@ -96,6 +98,13 @@
 			remoteGlobalIDString = 7C4C2B85255B2A3D001B9E5F;
 			remoteInfo = API;
 		};
+		7CC3654727AB1CC200CD6886 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7CDAC0622559D6D4002BFDAE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7C4C2B38255ADD91001B9E5F;
+			remoteInfo = RestClient;
+		};
 		7CDAC0812559D6D5002BFDAE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7CDAC0622559D6D4002BFDAE /* Project object */;
@@ -121,6 +130,17 @@
 			files = (
 				7C4C2B4F255ADD91001B9E5F /* RestClient.framework in Embed Frameworks */,
 				7C4C2B9C255B2A3D001B9E5F /* API.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CC3654927AB1CC200CD6886 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7CC3654627AB1CC200CD6886 /* RestClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,6 +222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CC3654527AB1CC200CD6886 /* RestClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +416,13 @@
 			path = Favorites;
 			sourceTree = "<group>";
 		};
+		7CC3654427AB1CC200CD6886 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7CDAC0612559D6D4002BFDAE = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +434,7 @@
 				7C4C2B87255B2A3D001B9E5F /* API */,
 				7C4C2B94255B2A3D001B9E5F /* APITests */,
 				7CDAC06B2559D6D4002BFDAE /* Products */,
+				7CC3654427AB1CC200CD6886 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -524,10 +553,12 @@
 				7C4C2B82255B2A3D001B9E5F /* Sources */,
 				7C4C2B83255B2A3D001B9E5F /* Frameworks */,
 				7C4C2B84255B2A3D001B9E5F /* Resources */,
+				7CC3654927AB1CC200CD6886 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7CC3654827AB1CC200CD6886 /* PBXTargetDependency */,
 			);
 			name = API;
 			productName = API;
@@ -841,6 +872,11 @@
 			isa = PBXTargetDependency;
 			target = 7C4C2B85255B2A3D001B9E5F /* API */;
 			targetProxy = 7C4C2B99255B2A3D001B9E5F /* PBXContainerItemProxy */;
+		};
+		7CC3654827AB1CC200CD6886 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7C4C2B38255ADD91001B9E5F /* RestClient */;
+			targetProxy = 7CC3654727AB1CC200CD6886 /* PBXContainerItemProxy */;
 		};
 		7CDAC0822559D6D5002BFDAE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
