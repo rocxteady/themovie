@@ -1,4 +1,3 @@
-# themovie
 ## The Movie DB iOS App Example
 Sample iOS application presenting usage of MVVM pattern using The Movie DB API.
 
